@@ -1,0 +1,130 @@
+<?php
+class Ventana
+{
+
+  // 
+  protected $resolucion_x,
+            $resolucion_y
+            $pantalla,
+            $score,
+            $lives;
+						
+	function __construct()
+	{
+		$this -> pantalla = new Pantalla();
+    $this -> resolucion_x = 1366;
+    $this -> resolucion_y = 768;
+    $this -> score = 0;
+    $this -> lives = 5;
+  }
+
+}
+class Pantalla 
+{
+
+	protected $enemigo,
+						$jugador,
+						$objetos;
+	
+  function init()
+	{
+    $this -> enemigo = new enemigo();
+    $this -> jugador = new jugador();
+  }
+
+ }
+
+class Sprite
+{
+  protected $Identificador,
+            $Direccion,
+            $Posicion_X,
+            $Posicion_Y,
+ 			   		$numero_de_frame = 60;
+
+	//Metodos
+	public function update()
+        {
+            $this->delete();
+            $this->move();
+            $this->draw();
+        }
+
+	private function Borrar_Personaje()
+        {
+            echo "Jugador borrado <br>";
+        }
+
+        private function Mover_Personaje()
+        {
+            $this->Posicion_X++;
+            $this->Posicion_Y++;
+            echo "Actualizamos coordenadas: 
+                Xpos: " . $this->Posicion_X . " Ypos: " . $this->Posicion_Y . "<br>";
+        }
+
+        private function draw()
+        {
+            echo "Jugador dibujado en nueva posición <br>";
+        }  
+}
+
+class Jugador extends Sprite
+{
+	function __construct() 
+  {
+            $this -> Identificador = 1;
+            $this -> Posicion_X = 45;
+            $this -> Posicion_Y = 35;
+            $this -> numero_de_frame = 65;
+  }
+        		
+  }
+  class Enemigo extends Sprite 
+  {
+    private $velocidad,
+            $lanza_hachas,
+            $N_golpes_morir,
+            $Puntuacion;
+
+  function __construct() 
+  {
+    $this -> Identificador = 2;
+    $this -> Posicion_X = 100;
+    $this -> Posicion_Y = 120;
+    $this -> numero_de_frame = 65;
+    $this -> velocidad = 50;
+    $this -> lanza_hachas = true;
+    $this -> N_golpes_morir = 3;
+    $this -> Puntuacion = 40;
+  }
+  }
+  class Hacha extends Sprite 
+  {
+    private $velocidad;
+        function __construct() 
+    {
+      $this -> Identificador = 3;
+      $this -> Posicion_X = 105;
+      $this -> Posicion_Y = 125;
+      $this -> numero_de_frame = 70;
+      $this -> velocidad = 45;
+    }
+  }
+  class Graficos {
+    private $altura,
+            $Anchura,
+            $color;
+
+            function __construct() {
+              $this -> altura = 20;
+              $this -> Anchura = 30;
+              $this -> color = "red";
+            }
+  }
+  class Nivel extends Graficos {
+    private $tiles,
+            $blocks;
+  }
+
+?>
